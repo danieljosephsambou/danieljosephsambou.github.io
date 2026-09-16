@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Portfolio de Daniel Joseph Sambou — développeur & data scientist basé à Dakar.">
+<title>Daniel Joseph Sambou</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,700;9..144,900&family=IBM+Plex+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+  :root {
+    --ink: #10182B;
+    --ink-2: #2A3247;
+    --paper: #F5F2E9;
+    --paper-2: #EDE8DB;
+    --rule: #1B2136;
+    --rule-soft: rgba(16,24,43,0.16);
+    --accent: #C64B1B;      /* terre cuite du Sahel */
+    --accent-2: #1F6F6A;    /* teal profond */
+    --gold: #C89434;        /* laiton */
+    --muted: #5B5E68;
+    --bg: var(--paper);
+    --fg: var(--ink);
+    --surface: #FFFDF6;
+    --card-shadow: 0 1px 0 rgba(16,24,43,.06);
+  }
+  :root:not([data-theme="light"]) {
+    @media (prefers-color-scheme: dark) {
+      :root { }
+    }
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ink: #F1EADA;
+      --ink-2: #C5C0B0;
+      --paper: #0E1120;
+      --paper-2: #161A2C;
+      --rule: #E7DFC9;
+      --rule-soft: rgba(241,234,218,0.18);
+      --accent: #E86B3B;
+      --accent-2: #3FA79E;
+      --gold: #E1B45E;
+      --muted: #8E93A3;
+      --bg: var(--paper);
+      --fg: var(--ink);
+      --surface: #131728;
+      --card-shadow: 0 1px 0 rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="dark"] {
+    --ink: #F1EADA;
+    --ink-2: #C5C0B0;
+    --paper: #0E1120;
+    --paper-2: #161A2C;
+    --rule: #E7DFC9;
+    --rule-soft: rgba(241,234,218,0.18);
+    --accent: #E86B3B;
+    --accent-2: #3FA79E;
+    --gold: #E1B45E;
+    --muted: #8E93A3;
+    --bg: var(--paper);
+    --fg: var(--ink);
+    --surface: #131728;
+    --card-shadow: 0 1px 0 rgba(0,0,0,.35);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: 'IBM Plex Sans', system-ui, -apple-system, Segoe UI, sans-serif;
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding-inline: clamp(20px, 4vw, 56px);
+    padding-block: clamp(28px, 4vw, 56px);
+  }
+
+  /* Topbar */
+  .topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--rule-soft);
+  }
+  .topbar .mono b { color: var(--fg); font-weight: 500; }
+  .topbar nav { display: flex; gap: 22px; flex-wrap: wrap; }
+  .topbar nav a { color: var(--muted); text-decoration: none; }
+  .topbar nav a:hover { color: var(--accent); }
+  .theme-toggle {
+    background: none; border: 1px solid var(--rule-soft); color: var(--muted);
+    padding: 6px 10px; border-radius: 999px; cursor: pointer;
+    font: inherit; font-size: 11px; letter-spacing: .08em; text-transform: uppercase;
+  }
+  .theme-toggle:hover { color: var(--fg); border-color: var(--fg); }
+
+  /* Hero */
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding-block: clamp(36px, 6vw, 72px);
+    border-bottom: 1px solid var(--rule-soft);
+  }
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  h1.name {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 400;
+    font-variation-settings: 'opsz' 144;
+    font-size: clamp(48px, 9.5vw, 128px);
+    line-height: 0.92;
+    letter-spacing: -0.02em;
+    margin: 6px 0 0;
+    text-wrap: balance;
+  }
+  h1.name em {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--accent);
+  }
+  .lede {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 300;
+    font-size: clamp(19px, 2.1vw, 26px);
+    line-height: 1.45;
+    max-width: 62ch;
+    color: var(--ink-2);
+    margin-top: 8px;
+  }
+  .lede strong { color: var(--fg); font-weight: 500; }
+  .hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 22px;
+    margin-top: 18px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+  }
+  .hero-meta a { color: var(--fg); text-decoration: none; border-bottom: 1px dotted var(--rule-soft); }
+  .hero-meta a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+  .dot { color: var(--accent); }
+
+  /* Section */
+  section { padding-block: clamp(40px, 6vw, 72px); border-bottom: 1px solid var(--rule-soft); }
+  section:last-of-type { border-bottom: none; }
+  .section-head {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+    margin-bottom: 32px;
+  }
+  .kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .kicker::before { content: "§ "; color: var(--accent); }
+  h2 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 500;
+    font-variation-settings: 'opsz' 144;
+    font-size: clamp(30px, 4.4vw, 52px);
+    line-height: 1;
+    letter-spacing: -0.015em;
+    margin: 0;
+    text-wrap: balance;
+  }
+  h2 em { font-style: italic; color: var(--accent-2); font-weight: 400; }
+
+  /* Approche */
+  .approach {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+  .approach .cell h3 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 22px;
+    margin: 0 0 8px;
+    letter-spacing: -0.005em;
+  }
+  .approach .cell p {
+    margin: 0;
+    color: var(--ink-2);
+    font-size: 15px;
+    line-height: 1.55;
+  }
+  .approach .num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+
+  /* Projects */
+  .projects { display: grid; gap: 0; }
+  .project {
+    display: grid;
+    grid-template-columns: 140px 1fr auto;
+    gap: 28px;
+    align-items: baseline;
+    padding: 28px 0;
+    border-top: 1px solid var(--rule-soft);
+    position: relative;
+  }
+  .project:first-child { border-top: 1px solid var(--rule); }
+  .project:last-child { border-bottom: 1px solid var(--rule); }
+  .project .idx {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+  }
+  .project .idx b { color: var(--accent); font-weight: 500; }
+  .project h3 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-variation-settings: 'opsz' 144;
+    font-size: clamp(24px, 3vw, 34px);
+    line-height: 1.1;
+    margin: 0 0 10px;
+    letter-spacing: -0.01em;
+  }
+  .project h3 .sub {
+    display: block;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--muted);
+    letter-spacing: 0.02em;
+    margin-top: 4px;
+    font-style: normal;
+  }
+  .project p {
+    margin: 0 0 12px;
+    color: var(--ink-2);
+    max-width: 62ch;
+  }
+  .project .stack {
+    display: flex; flex-wrap: wrap; gap: 6px 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+  }
+  .project .stack span {
+    padding: 3px 8px;
+    border: 1px solid var(--rule-soft);
+    border-radius: 999px;
+  }
+  .project .year {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    align-self: start;
+    padding-top: 4px;
+  }
+  .metric-row {
+    display: flex; flex-wrap: wrap; gap: 24px;
+    margin-top: 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .metric-row b {
+    color: var(--fg);
+    font-weight: 500;
+    font-size: 15px;
+    font-family: 'Fraunces', serif;
+    display: block;
+    line-height: 1;
+    margin-bottom: 2px;
+    letter-spacing: -0.01em;
+  }
+
+  /* Experience */
+  .xp { display: grid; gap: 0; }
+  .xp .row {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 28px;
+    padding: 24px 0;
+    border-top: 1px solid var(--rule-soft);
+  }
+  .xp .row:first-child { border-top: 1px solid var(--rule); }
+  .xp .row:last-child { border-bottom: 1px solid var(--rule); }
+  .xp .when {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+  }
+  .xp .when b { display: block; color: var(--fg); font-weight: 500; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 4px; }
+  .xp h3 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 22px;
+    margin: 0 0 4px;
+    letter-spacing: -0.01em;
+  }
+  .xp .org {
+    color: var(--accent-2);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    margin-bottom: 10px;
+  }
+  .xp ul { margin: 0; padding-left: 18px; color: var(--ink-2); }
+  .xp li { margin-bottom: 4px; }
+
+  /* Skills */
+  .skills {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+  .skill-block h4 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--rule-soft);
+  }
+  .skill-block ul { list-style: none; margin: 0; padding: 0; }
+  .skill-block li {
+    padding: 5px 0;
+    font-size: 14px;
+    color: var(--ink-2);
+    display: flex; justify-content: space-between; gap: 10px;
+    border-bottom: 1px dotted var(--rule-soft);
+  }
+  .skill-block li:last-child { border-bottom: none; }
+  .skill-block li .lvl {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+  }
+
+  /* Education */
+  .edu { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; }
+  .edu .card {
+    background: var(--surface);
+    padding: 22px;
+    border: 1px solid var(--rule-soft);
+    box-shadow: var(--card-shadow);
+  }
+  .edu .year {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .edu h3 { font-family: 'Fraunces', serif; font-weight: 500; font-size: 18px; margin: 0 0 4px; letter-spacing: -0.01em; }
+  .edu p { margin: 0; color: var(--muted); font-size: 13px; }
+
+  /* Contact */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 40px;
+    align-items: start;
+  }
+  .contact-note {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(22px, 2.6vw, 30px);
+    line-height: 1.35;
+    color: var(--ink-2);
+    text-wrap: balance;
+  }
+  .contact-note strong { color: var(--fg); font-weight: 500; }
+  .contact-list { display: grid; gap: 14px; }
+  .contact-list a {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--rule-soft);
+    text-decoration: none;
+    color: var(--fg);
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    transition: color .2s;
+  }
+  .contact-list a:hover { color: var(--accent); }
+  .contact-list a span {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* Footer */
+  footer {
+    padding-block: 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    border-top: 1px solid var(--rule);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  footer .glyph { color: var(--accent); }
+
+  /* Marks */
+  .mark {
+    display: inline-block;
+    padding: 0 6px;
+    background: linear-gradient(180deg, transparent 60%, color-mix(in oklab, var(--gold) 40%, transparent) 60%);
+  }
+
+  /* Responsive */
+  @media (max-width: 860px) {
+    .approach { grid-template-columns: 1fr; }
+    .project { grid-template-columns: 1fr; gap: 12px; }
+    .project .year { padding-top: 0; }
+    .xp .row { grid-template-columns: 1fr; gap: 10px; }
+    .skills { grid-template-columns: repeat(2, 1fr); }
+    .edu { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .topbar nav { display: none; }
+  }
+  @media (max-width: 480px) {
+    .skills { grid-template-columns: 1fr; }
+  }
+
+  ::selection { background: var(--accent); color: var(--paper); }
+</style>
+
+</head>
+<body>
+<div class="wrap">
+
+  <header class="topbar">
+    <div class="mono"><b>DJS</b> · Portfolio · 2026</div>
+    <nav>
+      <a href="#projets">Projets</a>
+      <a href="#parcours">Parcours</a>
+      <a href="#competences">Compétences</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <button class="theme-toggle" id="themeToggle" aria-label="Basculer le thème">Thème</button>
+  </header>
+
+  <section class="hero">
+    <div class="eyebrow">— Dakar · Sénégal · Disponible</div>
+    <h1 class="name">Daniel Joseph<br>Sambou<em>.</em></h1>
+    <p class="lede">
+      <strong>Développeur & data scientist.</strong> Je construis des outils qui rendent
+      la paie, la fraude et les mathématiques <em>lisibles</em> — des formules PL/SQL
+      qui tournent chaque mois pour des milliers de bulletins, aux API de détection
+      qui isolent le signal dans 400 000 lignes de comptage électrique.
+    </p>
+    <div class="hero-meta">
+      <span><span class="dot">◆</span> Popay · Stage 2026</span>
+      <span><span class="dot">◆</span> Master Data Science & IA</span>
+      <a href="mailto:danieljosephsambou@outlook.com">danieljosephsambou@outlook.com</a>
+      <a href="tel:+221771450847">+221 77 145 08 47</a>
+      <a href="https://github.com/danieljosephsambou" target="_blank" rel="noopener">github/danieljosephsambou</a>
+    </div>
+  </section>
+
+  <section id="approche">
+    <div class="section-head">
+      <div class="kicker">01 — Approche</div>
+      <h2>Le code livré, <em>pas juste imaginé</em>.</h2>
+    </div>
+    <div class="approach">
+      <div class="cell">
+        <div class="num">— A</div>
+        <h3>Du métier au modèle</h3>
+        <p>Je pars des règles réelles — un article du code du travail sénégalais, une exemption fiscale camerounaise, une règle physique de compteur — avant d'écrire une seule ligne. Le modèle sert la règle, jamais l'inverse.</p>
+      </div>
+      <div class="cell">
+        <div class="num">— B</div>
+        <h3>Full-stack pragmatique</h3>
+        <p>FastAPI côté serveur, React/TypeScript/Vite côté client, SQL là où les données vivent. Une stack que je maîtrise assez pour livrer vite et corriger un bug sans devoir tout redessiner.</p>
+      </div>
+      <div class="cell">
+        <div class="num">— C</div>
+        <h3>Lisible et documenté</h3>
+        <p>Une formule de paie, une API de fraude ou un labo de maths se relit six mois plus tard. Nommage explicite, décisions consignées, cas limites énoncés — c'est ce qui distingue un prototype d'un outil qui tourne.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="projets">
+    <div class="section-head">
+      <div class="kicker">02 — Réalisations sélectionnées</div>
+      <h2>Six projets, <em>trois terrains</em>.</h2>
+    </div>
+
+    <div class="projects">
+
+      <article class="project">
+        <div class="idx"><b>P·01</b><br>Popay</div>
+        <div>
+          <h3>Popay Compare
+            <span class="sub">Outil d'audit de paie — comparaison inter-sources, Sénégal & Burkina Faso</span>
+          </h3>
+          <p>
+            Cinq tables plates imposées par la direction, résolution floue des rubriques,
+            confirmation par dictionnaire YAML, protection contre les NaN à la
+            sérialisation, et structure en drill-down pour remonter d'un écart total
+            jusqu'à la ligne de bulletin fautive.
+          </p>
+          <div class="stack">
+            <span>FastAPI</span><span>React 19 · TS · Vite</span><span>Tailwind</span><span>SQLite</span><span>PyYAML</span>
+          </div>
+          <div class="metric-row">
+            <span><b>59</b>rubriques cartographiées</span>
+            <span><b>5</b>tables comparées</span>
+            <span><b>2</b>pays couverts</span>
+          </div>
+        </div>
+        <div class="year">2026</div>
+      </article>
+
+      <article class="project">
+        <div class="idx"><b>P·02</b><br>SENELEC</div>
+        <div>
+          <h3>Détection de fraude — compteurs BEL_AIR
+            <span class="sub">API de scoring temps réel sur données de comptage électrique</span>
+          </h3>
+          <p>
+            Étiquetage à partir d'une règle physique — courant présent, tension
+            absente — sur près de 400 000 relevés. Random Forest et XGBoost
+            entraînés en comparaison ; intégration prévue en API FastAPI pour un
+            scoring temps réel dans le SI cible.
+          </p>
+          <div class="stack">
+            <span>Python 3.12</span><span>scikit-learn</span><span>XGBoost</span><span>FastAPI</span><span>pandas</span>
+          </div>
+          <div class="metric-row">
+            <span><b>397K</b>relevés analysés</span>
+            <span><b>F1 · 99,4%</b>meilleur modèle</span>
+            <span><b>1</b>règle physique</span>
+          </div>
+        </div>
+        <div class="year">2024–25</div>
+      </article>
+
+      <article class="project">
+        <div class="idx"><b>P·03</b><br>Popay</div>
+        <div>
+          <h3>Formules PL/SQL multi-pays
+            <span class="sub">Congés SN, taxation CM, astreinte GA, présence WAVE</span>
+          </h3>
+          <p>
+            <span class="mark">ALLOCATION_CONGE_SN</span> — décomposition de la
+            formule du 1/24ᵉ et des majorations d'ancienneté. Correctif critique
+            d'une accumulation où une boucle vide laissait <em>l_abs_type_code</em>
+            à une valeur héritée. Refonte de <span class="mark">GESTION_PRESENCE_WAVE</span>
+            avec ratio dynamique en lieu et place du diviseur fixe /30.
+          </p>
+          <div class="stack">
+            <span>PL/SQL</span><span>Oracle</span><span>Paie multi-pays</span><span>SN · CM · GA · BF</span>
+          </div>
+          <div class="metric-row">
+            <span><b>4</b>pays servis</span>
+            <span><b>1</b>bug critique corrigé</span>
+            <span><b>30j → n·j</b>ratio de proration</span>
+          </div>
+        </div>
+        <div class="year">2026</div>
+      </article>
+
+      <article class="project">
+        <div class="idx"><b>P·04</b><br>Perso</div>
+        <div>
+          <h3>MathLab & AnalyseLab
+            <span class="sub">Laboratoires web de mathématiques — algèbre, géométrie, analyse</span>
+          </h3>
+          <p>
+            Neuf modules livrés en V8–V10 : tests statistiques, opérations
+            matricielles (produit, puissance, exponentielle), géométrie du triangle,
+            coordonnées barycentriques, intégrales doubles. AnalyseLab prolonge
+            l'effort au niveau universitaire (EDO, analyse réelle) avec une
+            interface React/Vite dédiée.
+          </p>
+          <div class="stack">
+            <span>FastAPI</span><span>SymPy</span><span>SciPy</span><span>NetworkX</span><span>KaTeX</span><span>Chart.js</span>
+          </div>
+          <div class="metric-row">
+            <span><b>9</b>modules mathématiques</span>
+            <span><b>V10</b>version courante</span>
+            <span><b>2</b>labos parallèles</span>
+          </div>
+        </div>
+        <div class="year">2025–26</div>
+      </article>
+
+      <article class="project">
+        <div class="idx"><b>P·05</b><br>Perso</div>
+        <div>
+          <h3>Vocal Remover · Desktop
+            <span class="sub">Séparation de sources audio, cache SHA-256, waveform interactive</span>
+          </h3>
+          <p>
+            Application locale FastAPI + React empaquetée avec PyInstaller.
+            Modèles Demucs configurables, visualisation d'ondes WaveSurfer,
+            cache SHA-256 sur les fichiers pour éviter les rendus doublons,
+            import direct YouTube via yt-dlp. Trois versions majeures itérées.
+          </p>
+          <div class="stack">
+            <span>FastAPI</span><span>Demucs</span><span>React · Vite · TS</span><span>WaveSurfer</span><span>PyInstaller</span>
+          </div>
+          <div class="metric-row">
+            <span><b>3</b>versions majeures</span>
+            <span><b>SHA-256</b>cache déterministe</span>
+            <span><b>1-clic</b>installateur Windows</span>
+          </div>
+        </div>
+        <div class="year">2025–26</div>
+      </article>
+
+      <article class="project">
+        <div class="idx"><b>P·06</b><br>Perso</div>
+        <div>
+          <h3>Analyseur de qualification — CM2026
+            <span class="sub">Probabilités de qualification du Sénégal, Monte-Carlo + Elo–Poisson</span>
+          </h3>
+          <p>
+            Simulation Monte-Carlo des matchs restants à partir d'un modèle Elo–Poisson
+            calibré sur données historiques. Frontend Tailwind + Chart.js pour lire
+            les distributions ; recharge des scores en direct au fil des journées
+            de qualification.
+          </p>
+          <div class="stack">
+            <span>FastAPI</span><span>NumPy</span><span>Monte-Carlo</span><span>Elo</span><span>Chart.js</span>
+          </div>
+          <div class="metric-row">
+            <span><b>10K+</b>simulations / requête</span>
+            <span><b>Elo–Poisson</b>modèle de score</span>
+            <span><b>Live</b>mise à jour matchs</span>
+          </div>
+        </div>
+        <div class="year">2025</div>
+      </article>
+
+    </div>
+  </section>
+
+  <section id="parcours">
+    <div class="section-head">
+      <div class="kicker">03 — Parcours professionnel</div>
+      <h2>Trois stages, <em>trois métiers</em>.</h2>
+    </div>
+    <div class="xp">
+      <div class="row">
+        <div class="when"><b>Avr — Sep 2026</b>Popay</div>
+        <div>
+          <h3>Stagiaire — Développement & Data Science</h3>
+          <div class="org">Popay · Plateforme de paie multi-pays (SN, BF, CM, GA)</div>
+          <ul>
+            <li>Développement et maintenance de formules de paie PL/SQL pour quatre pays africains.</li>
+            <li>Contribution full-stack à des applications web métier (paie et RH) — FastAPI + React.</li>
+            <li>Analyse des données de paie et RH : préparation, contrôle qualité, indicateurs, restitutions.</li>
+            <li>Outillage interne — Popay Compare — pour l'audit croisé des sorties de paie.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="row">
+        <div class="when"><b>Avr — Mai 2025</b>Sabre GDS</div>
+        <div>
+          <h3>Stagiaire — Agent de consolidation</h3>
+          <div class="org">Sabre GDS Sénégal</div>
+          <ul>
+            <li>Consolidation des données de réservation auprès des agences de voyages partenaires.</li>
+            <li>Contrôle, rapprochement et fiabilisation des flux d'informations transitant par le GDS.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="row">
+        <div class="when"><b>Oct — Déc 2024</b>SENELEC</div>
+        <div>
+          <h3>Stagiaire — API de détection de fraude</h3>
+          <div class="org">SENELEC · DSI & Direction du Développement Économique et Social</div>
+          <ul>
+            <li>Conception et développement d'une API de détection de fraude sur les données de comptage électrique.</li>
+            <li>Préparation des données, prototypage de modèles ML, intégration au SI cible.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="competences">
+    <div class="section-head">
+      <div class="kicker">04 — Compétences techniques</div>
+      <h2>La stack <em>vraiment utilisée</em>.</h2>
+    </div>
+    <div class="skills">
+      <div class="skill-block">
+        <h4>Langages</h4>
+        <ul>
+          <li>Python 3.12 <span class="lvl">quotidien</span></li>
+          <li>SQL / PL/SQL <span class="lvl">quotidien</span></li>
+          <li>TypeScript <span class="lvl">confirmé</span></li>
+          <li>JavaScript (ES2023) <span class="lvl">confirmé</span></li>
+        </ul>
+      </div>
+      <div class="skill-block">
+        <h4>Data & ML</h4>
+        <ul>
+          <li>pandas · NumPy <span class="lvl">quotidien</span></li>
+          <li>scikit-learn <span class="lvl">confirmé</span></li>
+          <li>XGBoost <span class="lvl">confirmé</span></li>
+          <li>SymPy · SciPy <span class="lvl">confirmé</span></li>
+          <li>matplotlib · Chart.js <span class="lvl">confirmé</span></li>
+        </ul>
+      </div>
+      <div class="skill-block">
+        <h4>Web & API</h4>
+        <ul>
+          <li>FastAPI <span class="lvl">quotidien</span></li>
+          <li>React 19 + Vite <span class="lvl">confirmé</span></li>
+          <li>Tailwind CSS <span class="lvl">confirmé</span></li>
+          <li>KaTeX · WaveSurfer <span class="lvl">projet</span></li>
+        </ul>
+      </div>
+      <div class="skill-block">
+        <h4>Data & outils</h4>
+        <ul>
+          <li>Oracle · MySQL · PostgreSQL <span class="lvl">confirmé</span></li>
+          <li>SQLite <span class="lvl">quotidien</span></li>
+          <li>Power BI · Tableau <span class="lvl">notions</span></li>
+          <li>Excel avancé (TCD, formules) <span class="lvl">confirmé</span></li>
+          <li>PyInstaller · Git <span class="lvl">confirmé</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="formation">
+    <div class="section-head">
+      <div class="kicker">05 — Formation</div>
+      <h2>Data science <em>et</em> gestion.</h2>
+    </div>
+    <div class="edu">
+      <div class="card">
+        <div class="year">2023 — 2025</div>
+        <h3>Master — Data Science & IA</h3>
+        <p>Institut Supérieur Informatique, Dakar</p>
+      </div>
+      <div class="card">
+        <div class="year">2019 — 2023</div>
+        <h3>Licence — Informatique de gestion</h3>
+        <p>Institut Supérieur de Management, Dakar</p>
+      </div>
+      <div class="card">
+        <div class="year">2013 — 2019</div>
+        <h3>Baccalauréat — Série S2</h3>
+        <p>Cours Sacré-Cœur, Dakar</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="langues">
+    <div class="section-head">
+      <div class="kicker">06 — Langues & qualités</div>
+      <h2>Comment je travaille.</h2>
+    </div>
+    <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 40px;" class="lang-wrap">
+      <div>
+        <div class="kicker" style="margin-bottom: 14px;">Langues</div>
+        <p style="font-family: 'Fraunces', serif; font-size: 20px; line-height: 1.5; color: var(--ink-2); margin:0;">
+          <strong style="color:var(--fg);">Français</strong> — langue de travail ·
+          <strong style="color:var(--fg);">Anglais</strong> — professionnel ·
+          <strong style="color:var(--fg);">Wolof</strong> — langue maternelle.
+        </p>
+      </div>
+      <div>
+        <div class="kicker" style="margin-bottom: 14px;">Qualités</div>
+        <p style="font-family: 'Fraunces', serif; font-size: 20px; line-height: 1.5; color: var(--ink-2); margin:0;">
+          Esprit d'analyse · rigueur · résolution de problèmes ·
+          autonomie · apprentissage rapide · travail en équipe.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="section-head">
+      <div class="kicker">07 — Contact</div>
+      <h2>Un projet, <em>une question</em> ?</h2>
+    </div>
+    <div class="contact-grid">
+      <p class="contact-note">
+        Je suis basé à <strong>Dakar</strong> et disponible pour des missions
+        en <strong>data science, paie & développement full-stack</strong> —
+        en présentiel au Sénégal ou en distanciel avec les marchés africains
+        que je connais.
+      </p>
+      <div class="contact-list">
+        <a href="mailto:danieljosephsambou@outlook.com">danieljosephsambou@outlook.com <span>Email</span></a>
+        <a href="tel:+221771450847">+221 77 145 08 47 <span>Téléphone</span></a>
+        <a href="https://github.com/danieljosephsambou" target="_blank" rel="noopener">danieljosephsambou <span>GitHub</span></a>
+        <a href="#" onclick="return false;">Daniel Joseph SAMBOU <span>LinkedIn</span></a>
+        <a href="#" onclick="return false;">HLM Grand Médine, Dakar 14000 <span>Adresse</span></a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div><span class="glyph">◆</span> Daniel Joseph Sambou · 2026 — Dakar</div>
+    <div>Composé en Fraunces & IBM Plex Sans</div>
+  </footer>
+
+</div>
+
+<script>
+  (function () {
+    const root = document.documentElement;
+    const btn = document.getElementById('themeToggle');
+    let stored = null;
+    try { stored = localStorage.getItem('djs-theme'); } catch (e) {}
+    if (stored === 'dark' || stored === 'light') root.setAttribute('data-theme', stored);
+    function label() {
+      const t = root.getAttribute('data-theme');
+      const dark = t === 'dark' || (!t && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      btn.textContent = dark ? '☀ Clair' : '☾ Sombre';
+    }
+    label();
+    btn.addEventListener('click', function () {
+      const t = root.getAttribute('data-theme');
+      const dark = t === 'dark' || (!t && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      const next = dark ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      try { localStorage.setItem('djs-theme', next); } catch (e) {}
+      label();
+    });
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', label);
+  })();
+</script>
+
+</body>
+</html>
